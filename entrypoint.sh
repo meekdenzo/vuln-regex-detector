@@ -4,7 +4,7 @@ set -e
 
 # Install dependencies
 echo "Installing dependencies..."
-apt install -yq curl jq
+# sudo apt install -yq curl jq
 
 # Run configurations
 export VULN_REGEX_DETECTOR_ROOT=`pwd`
