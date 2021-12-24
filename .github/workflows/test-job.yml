@@ -1,0 +1,11 @@
+name: CI
+
+on: [push]
+
+jobs:
+  myjob:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check files in container
+    - run: ls -al
+    - run: git diff --name-only
