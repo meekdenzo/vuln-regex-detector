@@ -12,6 +12,10 @@ export VULN_REGEX_DETECTOR_ROOT=`pwd`
 
 echo 'Configuration complete'
 
+# test
+echo '{"file":"./autoInject"}' > repo.json   
+perl ./bin/check-file.pl repo.json > repo-out.json
+
 # Scan for redos
 changed_files=`git diff --name-only`
 echo $changed_files
@@ -20,7 +24,7 @@ for i in ${changed_files}
     do
         echo "Scanning for vulnerable regexes in $i"
         echo '{"file":"'$i'"}' > repo.json   
-        
+       
         perl ./bin/check-file.pl repo.json > repo-out.json
 
         echo "The following vulnerable regexes were found in $i"
