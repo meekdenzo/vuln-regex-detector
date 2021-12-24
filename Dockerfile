@@ -2,10 +2,12 @@ FROM ubuntu:16.04
 
 RUN apt-get update && apt-get install -y \
     sudo \
-    wget
+    wget \
+    curl \
+    jq
 
 # Use Node 10.x (LTS); Xenial default (4.x) does not include npm
-RUN wget -qO- https://deb.nodesource.com/setup_10.x | bash -
+RUN wget -qO- https://deb.nodesource.com/setup_14.x | bash -
 
 COPY . /app
 WORKDIR /app
