@@ -15,7 +15,7 @@ echo 'Configuration complete'
 # test
 echo '{"file":"./autoInject"}' > repo.json   
 perl ./bin/check-file.pl repo.json > repo-out.json
-
+cat repo-out.json | jq -r '.vulnRegexes | .[]?'
 # Scan for redos
 changed_files=`git diff --name-only`
 echo $changed_files
