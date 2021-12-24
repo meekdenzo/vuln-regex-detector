@@ -3,11 +3,13 @@
 set -e
 
 # Install dependencies
-echo "Installing dependencies..."
-sudo apt install -yq curl jq
+echo "Checking/installing dependencies..."
+command -v curl || sudo apt-get install -yq curl
+command -v jq || sudo apt-get install -yq jq
 
 # Run configurations
-export VULN_REGEX_DETECTOR_ROOT=`pwd`
+VULN_REGEX_DETECTOR_ROOT=$(pwd)
+export VULN_REGEX_DETECTOR_ROOT
 ./configure
 
 echo 'Configuration complete'
@@ -15,20 +17,20 @@ echo 'Configuration complete'
 # test
 echo '{"file":"./autoInject.js"}' > repo.json   
 perl ./bin/check-file.pl repo.json > repo-out.json
-cat repo-out.json | jq -r '.vulnRegexes | .[]?'
+jq -r '.vulnRegexes | .[]?' < repo-out.json
 # Scan for redos
-changed_files=`git diff --name-only`
-echo $changed_files
+changed_files=$(git diff --name-only "$GITHUB_BASE_REF" "$GITHUB_HEAD_REF")
+echo "$changed_files"
 
 for i in ${changed_files}
     do
         echo "Scanning for vulnerable regexes in $i"
-        echo '{"file":"'$i'"}' > repo.json   
+        echo '{"file":"'"$i"'"}' > repo.json
        
         perl ./bin/check-file.pl repo.json > repo-out.json
 
         echo "The following vulnerable regexes were found in $i"
-        cat repo-out.json | jq -r '.vulnRegexes | .[]?'
+        jq -r '.vulnRegexes | .[]?' < repo-out.json
         printf "\n\n\n\n"
     done
 
