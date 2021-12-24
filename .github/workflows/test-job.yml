@@ -22,4 +22,6 @@ jobs:
 
       - uses: actions/checkout@v2
       - name: Run entrypoint.sh
-        run: sh ./entrypoint.sh
+        run: |
+          sh ./entrypoint.sh
+          echo 'Hello, World!'
