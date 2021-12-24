@@ -10,8 +10,12 @@ sudo apt install -yq curl jq
 export VULN_REGEX_DETECTOR_ROOT=`pwd`
 ./configure
 
+echo 'Configuration complete'
+
 # Scan for redos
 changed_files=`git diff --name-only`
+echo $changed_files
+
 for i in ${changed_files}
     do
         echo "Scanning for vulnerable regexes in $i"
