@@ -1,25 +1,25 @@
-name: Scan changed files for ReDoS vulnerabilities 
+# name: Scan changed files for ReDoS vulnerabilities 
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+# on:
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build on Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm init --yes
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [12.x, 14.x]
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Build on Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - run: npm init --yes
 
-      - uses: actions/checkout@v2
-      - name: Run entrypoint.sh
-        run: sh ./entrypoint.sh
+#       - uses: actions/checkout@v2
+#       - name: Run entrypoint.sh
+#         run: sh ./entrypoint.sh
