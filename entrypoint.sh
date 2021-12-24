@@ -13,7 +13,7 @@ export VULN_REGEX_DETECTOR_ROOT=`pwd`
 echo 'Configuration complete'
 
 # test
-echo '{"file":"./autoInject"}' > repo.json   
+echo '{"file":"./autoInject.js"}' > repo.json   
 perl ./bin/check-file.pl repo.json > repo-out.json
 cat repo-out.json | jq -r '.vulnRegexes | .[]?'
 # Scan for redos
