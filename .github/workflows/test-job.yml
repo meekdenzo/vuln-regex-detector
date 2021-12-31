@@ -21,7 +21,9 @@ jobs:
       - run: npm init --yes
 
       - uses: actions/checkout@v2
+        with: 
+          fetch-depth: '0'
       - name: Run entrypoint.sh
         run: |
           echo 'Hello, World!'
-          git diff --name-only "$GITHUB_BASE_REF" "$GITHUB_HEAD_REF"
+          git show --name-only --pretty=format:
