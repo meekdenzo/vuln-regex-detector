@@ -2,5 +2,5 @@ package-lock.json
 node_modules
 replay_*
 hs_err*
-repo.json
-repo-out.json
+checkfile.json
+checkfile-out.json

@@ -10,7 +10,7 @@ command -v jq || sudo apt-get install -yq jq
 # Run configurations
 VULN_REGEX_DETECTOR_ROOT=$(pwd)
 export VULN_REGEX_DETECTOR_ROOT
-./configure
+./configure &>/dev/null
 
 echo 'Configuration complete'
 
@@ -19,9 +19,10 @@ echo '{"file":"./autoInject.js"}' > repo.json
 perl ./bin/check-file.pl repo.json > repo-out.json
 jq -r '.vulnRegexes | .[]?' < repo-out.json
 # Scan for redos
-changed_files=$(git diff --name-only "$GITHUB_BASE_REF" "$GITHUB_HEAD_REF")
+changed_files=$(git show --name-only --pretty=format:)
 echo "$changed_files"
 
+SECONDS=0
 for i in ${changed_files}
     do
         echo "Scanning for vulnerable regexes in $i"
@@ -33,5 +34,5 @@ for i in ${changed_files}
         jq -r '.vulnRegexes | .[]?' < repo-out.json
         printf "\n\n\n\n"
     done
-
-# Suggest changes
+duration=$SECONDS;
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed for scan."
