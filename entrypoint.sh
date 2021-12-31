@@ -7,8 +7,12 @@ echo "Installing dependencies..."
 sudo apt install -yq curl jq
 
 # Run configurations
+SECONDS_=0
 export VULN_REGEX_DETECTOR_ROOT=`pwd`
-./configure
+./configure > temp.log
+rm temp.log
+duration=$SECONDS_;
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed for configuration."
 
 echo 'Configuration complete'
 
@@ -20,6 +24,7 @@ cat repo-out.json | jq -r '.vulnRegexes | .[]?'
 changed_files=`git show --name-only --pretty=format:`
 echo $changed_files
 
+SECONDS=0
 for i in ${changed_files}
     do
         echo "Scanning for vulnerable regexes in $i"
@@ -31,5 +36,8 @@ for i in ${changed_files}
         cat repo-out.json | jq -r '.vulnRegexes | .[]?'
         printf "\n\n\n\n"
     done
+
+duration=$SECONDS;
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed for scan."
 
 # Suggest changes
