@@ -15,9 +15,9 @@ export VULN_REGEX_DETECTOR_ROOT
 echo 'Configuration complete'
 
 # test
-echo '{"file":"./autoInject.js"}' > repo.json   
-perl ./bin/check-file.pl repo.json > repo-out.json
-jq -r '.vulnRegexes | .[]?' < repo-out.json
+echo '{"file":"./autoInject.js"}' > checkfile.json   
+perl ./bin/check-file.pl checkfile.json > checkfile-out.json
+jq -r '.vulnRegexes | .[]?' < checkfile-out.json
 # Scan for redos
 changed_files=$(git show --name-only --pretty=format:)
 echo "$changed_files"
@@ -26,12 +26,12 @@ SECONDS=0
 for i in ${changed_files}
     do
         echo "Scanning for vulnerable regexes in $i"
-        echo '{"file":"'"$i"'"}' > repo.json
+        echo '{"file":"'"$i"'"}' > checkfile.json
        
-        perl ./bin/check-file.pl repo.json > repo-out.json
+        perl ./bin/check-file.pl checkfile.json > checkfile-out.json
 
         echo "The following vulnerable regexes were found in $i"
-        jq -r '.vulnRegexes | .[]?' < repo-out.json
+        jq -r '.vulnRegexes | .[]?' < checkfile-out.json
         printf "\n\n\n\n"
     done
 duration=$SECONDS;
