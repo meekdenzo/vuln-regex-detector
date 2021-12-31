@@ -24,4 +24,4 @@ jobs:
       - name: Run entrypoint.sh
         run: |
           echo 'Hello, World!'
-          sh ./entrypoint.sh
+          git diff --name-only "$GITHUB_BASE_REF" "$GITHUB_HEAD_REF"
