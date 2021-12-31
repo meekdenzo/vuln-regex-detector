@@ -10,7 +10,7 @@ command -v jq || sudo apt-get install -yq jq
 # Run configurations
 VULN_REGEX_DETECTOR_ROOT=$(pwd)
 export VULN_REGEX_DETECTOR_ROOT
-./configure &>/dev/null
+./configure
 
 echo 'Configuration complete'
 
