@@ -24,4 +24,4 @@ jobs:
       - name: Run entrypoint.sh
         run: |
           echo 'Hello, World!'
-          git show --name-only --pretty=format
+          git show --pretty=format
