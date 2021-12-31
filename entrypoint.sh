@@ -9,8 +9,7 @@ sudo apt install -yq curl jq
 # Run configurations
 SECONDS_=0
 export VULN_REGEX_DETECTOR_ROOT=`pwd`
-./configure > temp.log
-rm temp.log
+./configure &>/dev/null
 duration=$SECONDS_;
 echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed for configuration."
 
