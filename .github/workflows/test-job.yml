@@ -25,6 +25,5 @@ jobs:
           fetch-depth: '0'
       - name: Run entrypoint.sh
         run: |
-          echo "$GITHUB_BASE_REF"
-          echo "$GITHUB_HEAD_REF"
-          git diff --name-only "$GITHUB_BASE_REF" -- "$GITHUB_HEAD_REF"
+          git diff --name-only HEAD^ HEAD
+          git show --name-only --pretty=format:
