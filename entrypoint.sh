@@ -3,16 +3,16 @@
 set -e
 
 # Install dependencies
-echo "Checking/installing dependencies..."
-command -v curl || sudo apt-get install -yq curl
-command -v jq || sudo apt-get install -yq jq
+# echo "Checking/installing dependencies..."
+# command -v curl || sudo apt-get install -yq curl
+# command -v jq || sudo apt-get install -yq jq
 
-# Run configurations
-VULN_REGEX_DETECTOR_ROOT=$(pwd)
-export VULN_REGEX_DETECTOR_ROOT
-./configure
+# # Run configurations
+# VULN_REGEX_DETECTOR_ROOT=$(pwd)
+# export VULN_REGEX_DETECTOR_ROOT
+# ./configure
 
-echo 'Configuration complete'
+# echo 'Configuration complete'
 
 # test
 echo '{"file":"./autoInject.js"}' > checkfile.json   
