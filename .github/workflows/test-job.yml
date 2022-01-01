@@ -1,21 +1,15 @@
-name: Scan changed files for ReDoS vulnerabilities 
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+name: container
+on: push
 
 jobs:
-  build:
+  node-docker:
     runs-on: ubuntu-latest
-
-    services:
-      vrd:
-        image: mdenzo/vuln-regex-detector:1.0.0
-      steps:
-        - name: Test env
-          run: |
-            pwd
-            ls
-            printenv
+    container:
+      image: mdenzo/vuln-regex-detector:1.0.0
+    steps:
+         - name: Test env
+           run: |
+             node -v
+             pwd
+             ls
+             printenv
