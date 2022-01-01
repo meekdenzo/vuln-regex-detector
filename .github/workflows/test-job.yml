@@ -26,4 +26,3 @@ jobs:
       - name: Run entrypoint.sh
         run: |
           git diff --name-only HEAD^ HEAD
-          git show --name-only --pretty=format:
