@@ -16,24 +16,24 @@ jobs:
         ports:
           - 5432/tcp
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build on Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm init --yes
+        strategy:
+          matrix:
+            node-version: [14.x]
+        steps:
+          - uses: actions/checkout@v2
+          - name: Build on Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v1
+            with:
+              node-version: ${{ matrix.node-version }}
+          - run: npm init --yes
 
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
-        env:
-          VULN_REGEX_DETECTOR_ROOT: ${{ job.services.vrd.ports[5432] }}
-          
-      - name: Run entrypoint.sh
-        run: |
-          ls
-          printenv
+          - uses: actions/checkout@v2
+            with:
+              fetch-depth: '0'
+            env:
+              VULN_REGEX_DETECTOR_ROOT: ${{ job.services.vrd.ports[5432] }}
+              
+          - name: Run entrypoint.sh
+            run: |
+              ls
+              printenv
