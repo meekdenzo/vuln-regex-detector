@@ -25,4 +25,5 @@ jobs:
           fetch-depth: '0'
       - name: Run entrypoint.sh
         run: |
-          sh ./entrypoint.sh
+          echo "$GITHUB_BASE_REF"
+          echo "$GITHUB_HEAD_REF"
