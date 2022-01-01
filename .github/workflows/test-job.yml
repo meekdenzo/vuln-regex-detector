@@ -14,7 +14,7 @@ jobs:
       vrd:
         image: mdenzo/vuln-regex-detector:1.0.0
         ports:
-          - 4000/tcp
+          - 5432/tcp
 
     strategy:
       matrix:
@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: '0'
         env:
-          VULN_REGEX_DETECTOR_ROOT: ${{ jobs.service.vrd.ports[4000] }}
+          VULN_REGEX_DETECTOR_ROOT: ${{ jobs.service.vrd.ports[5432] }}
           
       - name: Run entrypoint.sh
         run: |
