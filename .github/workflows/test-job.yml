@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: '0'
         env:
-          VULN_REGEX_DETECTOR_ROOT: ${{ jobs.service.vrd.ports[5432] }}
+          VULN_REGEX_DETECTOR_ROOT: ${{ jobs.services.vrd.ports[5432] }}
           
       - name: Run entrypoint.sh
         run: |
