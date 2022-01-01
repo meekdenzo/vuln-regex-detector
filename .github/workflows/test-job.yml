@@ -12,8 +12,8 @@ jobs:
 
     services:
       vrd:
-        image: mdenzo/vuln-regex-detector
-        
+        image: mdenzo/vuln-regex-detector:1.0.0
+
     strategy:
       matrix:
         node-version: [14.x]
