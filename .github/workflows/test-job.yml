@@ -35,7 +35,7 @@ jobs:
           
       - name: Run entrypoint.sh
         run: |
-          prinvenv | grep "VULN"
+          printenv | grep "VULN"
           printenv
           ls
           sh entrypoint.sh
