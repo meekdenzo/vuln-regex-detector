@@ -19,7 +19,7 @@ echo '{"file":"./autoInject.js"}' > checkfile.json
 perl ./bin/check-file.pl checkfile.json > checkfile-out.json
 jq -r '.vulnRegexes | .[]?' < checkfile-out.json
 # Scan for redos
-changed_files=$(git show --name-only --pretty=format:)
+changed_files=$(git diff --name-only HEAD^ HEAD | grep -v "^src/validate*")
 echo "$changed_files"
 
 SECONDS=0
