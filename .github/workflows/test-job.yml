@@ -36,4 +36,4 @@ jobs:
       - name: Run entrypoint.sh
         run: |
           ls
-          sh entrypoint.sh
+          printenv
