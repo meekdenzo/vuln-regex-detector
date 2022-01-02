@@ -9,7 +9,7 @@ jobs:
     steps:
         - name: Test env
           uses: actions/checkout@v1
-           run: |
+          run: |
              node -v
              pwd
              ls
