@@ -9,6 +9,8 @@ jobs:
     steps:
         - name: Test env
           uses: actions/checkout@v1
+
+        - name: Run a few commands
           run: |
              node -v
              pwd
