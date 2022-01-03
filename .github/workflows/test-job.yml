@@ -24,7 +24,9 @@ jobs:
             for i in ${CHANGED_FILES}
               do
                 echo $i
-                rsync $i changed-files/$i
+                cd changed-files
+                rsync $i .
+                cd ..
               done
 
             git clone davisjam/vuln-regex-detector
