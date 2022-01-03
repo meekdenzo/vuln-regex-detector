@@ -36,13 +36,11 @@ jobs:
             CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*\|^.git*"`
             echo $CHANGED_FILES
             echo `ls`
-            git clone https://github.com/davisjam/vuln-regex-detector.git
-            docker build -t vrd:latest ./vuln-regex-detector/.
-            docker run -tpvd changed-files:app/changed-files --name vrd:latest
-            docker exec --name vrd:latest "apt install -y jq"
+            docker pull mdenzo/vuln-regex-detector:1.0.0
+            docker run -tpvd changed-files:app/changed-files --name mdenzo/vuln-regex-detector:1.0.0
 
             for i in ${CHANGED_FILES}
               do
                 echo '{"file":"./changed-files/'$i'"}' > changed-files/repo.json;    
-                docker exec vrd:latest "perl ./bin/check-file.pl ./changed-files/repo.json > repo-out.json ; cat repo-out.json | jq -r '.vulnRegexes'"
+                docker exec mdenzo/vuln-regex-detector:1.0.0 "perl ./bin/check-file.pl ./changed-files/repo.json > repo-out.json ; cat repo-out.json | jq -r '.vulnRegexes'"
               done
