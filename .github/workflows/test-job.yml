@@ -22,7 +22,7 @@ jobs:
             for i in ${CHANGED_FILES}
               do
                 echo $i
-                rsync -a "$i" "changed-files/$i"
+                rsync -a "$i" "./changed-files/$i"
               done
 
             git clone davisjam/vuln-regex-detector
