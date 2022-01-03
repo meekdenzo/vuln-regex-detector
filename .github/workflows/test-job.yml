@@ -36,7 +36,7 @@ jobs:
             CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*\|^.git*"`
             echo $CHANGED_FILES
             echo `ls`
-            git clone davisjam/vuln-regex-detector
+            git clone https://github.com/davisjam/vuln-regex-detector.git
             docker build -t vrd:latest ./vuln-regex-detector/.
             docker run -tpvd changed-files:app/changed-files --name vrd:latest
             docker exec --name vrd:latest "apt install -y jq"
