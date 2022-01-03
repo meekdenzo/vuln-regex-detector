@@ -26,7 +26,8 @@ jobs:
                 echo $i
                 cd changed-files
                 echo `pwd`
-                cp $i .
+                cp ../$i .
+                ls
                 cd ..
               done
 
