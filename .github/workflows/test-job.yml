@@ -26,7 +26,7 @@ jobs:
                 echo $i
                 cd changed-files
                 echo `pwd`
-                rsync $i .
+                rsync -a $i .
                 cd ..
               done
 
