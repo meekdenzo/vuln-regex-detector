@@ -26,10 +26,15 @@ jobs:
                 echo $i
                 cd changed-files
                 echo `pwd`
-                rsync -a $i .
+                cp $i .
                 cd ..
               done
 
+        - name: Use docker container
+          run: |
+            CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*\|^.git*"`
+            echo $CHANGED_FILES
+            echo `ls`
             git clone davisjam/vuln-regex-detector
             docker build -t vrd:latest ./vuln-regex-detector/.
             docker run -tpvd changed-files:app/changed-files --name vrd:latest
