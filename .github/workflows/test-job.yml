@@ -18,6 +18,8 @@ jobs:
             CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*"`
             echo $CHANGED_FILES
             mkdir -p changed-files
+            echo `pwd`
+            echo `ls`
 
             for i in ${CHANGED_FILES}
               do
