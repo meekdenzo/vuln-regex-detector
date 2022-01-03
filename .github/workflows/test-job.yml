@@ -37,7 +37,7 @@ jobs:
             echo $CHANGED_FILES
             echo `ls`
             docker pull mdenzo/vuln-regex-detector:1.0.0
-            docker run -t -d -P -v changed-files:app/changed-files --name mdenzo/vuln-regex-detector:1.0.0
+            docker run -t -d -P -v changed-files:app/changed-files --name vrd mdenzo/vuln-regex-detector:1.0.0
 
             for i in ${CHANGED_FILES}
               do
