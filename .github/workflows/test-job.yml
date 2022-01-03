@@ -1,12 +1,17 @@
-name: Scan for redos
-on: push
+name: Scan changed files for ReDoS vulnerabilities 
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-          uses: actions/checkout@v1
+        - uses: actions/checkout@v1
 
         - name: Scan changed files
           run: |
@@ -23,7 +28,7 @@ jobs:
             docker build -t vrd:latest ./vuln-regex-detector/.
             docker run -tpvd changed-files:app/changed-files --name vrd:latest
             docker exec --name vrd:latest "apt install -y jq"
-            
+
             for i in ${CHANGED_FILES}
               do
                 echo '{"file":"./changed-files/'$i'"}' > changed-files/repo.json;    
