@@ -15,7 +15,7 @@ jobs:
 
         - name: Scan changed files
           run: |
-            CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*"`
+            CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*|^.gitignore*"`
             echo $CHANGED_FILES
             mkdir -p changed-files
             echo `pwd`
