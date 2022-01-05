@@ -1,46 +1,22 @@
-name: Scan changed files for ReDoS vulnerabilities 
+name: Vulnerable regex detector
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-        - name: Scan changed files
-          run: |
-            CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*\|^.git*"`
-            echo $CHANGED_FILES
-            mkdir -p changed-files
-            echo `pwd`
-            echo `ls`
-
-            for i in ${CHANGED_FILES}
-              do
-                echo $i
-                cd changed-files
-                echo `pwd`
-                cp ../$i .
-                ls
-                cd ..
-              done
-
-        - name: Use docker container
-          run: |
-            CHANGED_FILES=`git diff --name-only HEAD^ HEAD | grep -v "^src/validate*\|^.git*"`
-            echo $CHANGED_FILES
-            echo `ls`
-            docker pull mdenzo/vuln-regex-detector:1.0.0
-            docker run -t -d -P -v changed-files:/app/changed-files --name vrd mdenzo/vuln-regex-detector:1.0.0
-
-            for i in ${CHANGED_FILES}
-              do
-                echo '{"file":"./changed-files/'$i'"}' > changed-files/repo.json;    
-                docker exec mdenzo/vuln-regex-detector:1.0.0 "perl ./bin/check-file.pl ./changed-files/repo.json > repo-out.json ; cat repo-out.json | jq -r '.vulnRegexes'"
-              done
+      - name: Run entrypoint.sh
+        run: |
+          git log
+          git diff --name-only HEAD^ HEAD
+          sh ./entrypoint.sh
