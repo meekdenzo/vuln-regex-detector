@@ -20,5 +20,5 @@ jobs:
           echo $GITHUB_SHA
           echo $GITHUB_BASE_REF
           echo $GITHUB_HEAD_REF
-          git diff-tree --no-commit-id --name-only -r $GITHUB_SHA
-          git diff --name-only "$GITHUB_BASE_REF".."$GITHUB_HEAD_REF"
+          git diff-tree --no-commit-id -r $GITHUB_SHA
+          git diff "$GITHUB_BASE_REF".."$GITHUB_HEAD_REF"
