@@ -19,8 +19,6 @@ jobs:
 
       - name: Run entrypoint.sh
         run: |
-          echo $GITHUB_SHA
-          git diff --name-only HEAD^ HEAD
-          git diff-tree --no-commit-id -r $GITHUB_SHA
-          git show --name-only --pretty=format:
+          chmod +x ./entrypoint.sh
+          ./entrypoint.sh
         shell: bash
