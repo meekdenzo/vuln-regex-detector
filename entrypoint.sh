@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+# set -e
 
 # Install dependencies
 echo "Checking/installing dependencies..."
