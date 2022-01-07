@@ -20,4 +20,6 @@ jobs:
       - name: Run entrypoint.sh
         run: |
           echo $GITHUB_SHA
+          git diff-tree --no-commit-id -r $GITHUB_SHA
+          git show --name-only --pretty=format:
         shell: bash
