@@ -6,19 +6,12 @@ on:
   pull_request:
     branches: [ master ]
 
-  workflow_dispatch:
-
 jobs:
   build:
+    name: Scan for redos
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-        with: 
-          fetch-depth: '0'
-
-      - name: Run entrypoint.sh
-        run: |
-          chmod +x ./entrypoint.sh
-          ./entrypoint.sh
-        shell: bash
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Scan for redos
+        uses: meekdenzo/vrd@v1.0.0
