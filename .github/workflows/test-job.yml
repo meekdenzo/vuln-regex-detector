@@ -16,7 +16,7 @@ jobs:
         with: 
           fetch-depth: '0'
           
-      run: |
-        chmod +x ./entrypoint.sh
-        ./entrypoint.sh
+        run: |
+          chmod +x ./entrypoint.sh
+          ./entrypoint.sh
 
