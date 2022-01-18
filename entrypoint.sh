@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+# set -e
 
 # # Install dependencies
 # # echo "Checking/installing dependencies..."
@@ -84,7 +84,7 @@ cd $CLONE_DIR
 git checkout $STABLE_RELEASE
 VULN_REGEX_DETECTOR_ROOT=$(pwd)
 export VULN_REGEX_DETECTOR_ROOT
-./configure || true
+./configure #|| true
 cd ..
 
 # Scan for redos
