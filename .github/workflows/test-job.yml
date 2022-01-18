@@ -1,0 +1,23 @@
+name: Vulnerable regex detector
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Scan for redos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with: 
+          fetch-depth: '0'
+
+      - name: Scan 
+        run: |
+          chmod +x ./entrypoint.sh
+          ./entrypoint.sh
+
